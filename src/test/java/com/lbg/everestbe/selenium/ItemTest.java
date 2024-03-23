@@ -4,7 +4,6 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,7 +27,6 @@ public class ItemTest {
 	}
 
 	@Test
-	@Order(1)
 	void testCreate() {
 		this.driver.get("http://localhost:3000/items");
 
@@ -65,7 +63,6 @@ public class ItemTest {
 	}
 
 	@Test
-	@Order(2)
 	void EditTest() {
 
 		this.driver.get("http://localhost:3000/items/edit/1");

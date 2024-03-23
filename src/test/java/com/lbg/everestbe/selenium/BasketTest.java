@@ -4,7 +4,6 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -29,7 +28,6 @@ public class BasketTest {
 	}
 
 	@Test
-	@Order(1)
 	void testBasket() {
 		this.driver.get("http://localhost:3000/items");
 
