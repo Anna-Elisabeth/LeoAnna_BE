@@ -9,7 +9,9 @@ INSERT INTO
     )
 VALUES
     (
-        'leo',
+
+        'Liliano',
+
         '123 Road',
         'leo@domain.com',
         '012345678',
@@ -26,7 +28,9 @@ INSERT INTO
         `description`
     )
 VALUES
-    (1, 'card reader', 44.99, 1146, 'reader');
+
+    (1, 'Strawberries', 4.99, 5, 'Organic');
+
 
 INSERT INTO
     `item` (
@@ -37,7 +41,9 @@ INSERT INTO
         `description`
     )
 VALUES
-    (1, 'phone', 679.99, 6713, 'reader');
+
+    (1, 'Camera', 149.99, 4, 'Advanced Focus');
+
 
 INSERT INTO
     `item` (
@@ -48,15 +54,6 @@ INSERT INTO
         `description`
     )
 VALUES
-    (1, 'card', 0.99, 15, 'reader');
 
-INSERT INTO
-    `item` (
-        `customer_id`,
-        `name`,
-        `price`,
-        `quantity`,
-        `description`
-    )
-VALUES
-    (1, 'book', 14.99, 93, 'reader');
+    (1, 'Drone', 1500, 2, 'Real-time FPV');
+

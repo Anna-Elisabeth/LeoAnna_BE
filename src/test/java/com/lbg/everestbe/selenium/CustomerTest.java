@@ -1,14 +1,19 @@
 package com.lbg.everestbe.selenium;
 
+import static org.assertj.core.api.Assertions.fail;
+
 import java.time.Duration;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -39,11 +44,13 @@ public class CustomerTest {
 	}
 
 	@Test
+	@Order(1)
+
 	void testCreate() throws InterruptedException {
 		this.driver.get("http://localhost:3000/");
 
-		WebElement newCustLink = this.driver.findElement(By.cssSelector(
-				"#root > div.main-navbar.shadow-sm.sticky-top > div > div > div > div.col-md-5.my-auto > ul > li:nth-child(1) > a"));
+		WebElement newCustLink = this.driver.findElement(By
+				.cssSelector("#root > nav > div > div > div > div > div.col-md-5.my-auto > ul > li:nth-child(1) > a"));
 		newCustLink.click();
 
 		WebElement name = this.driver.findElement(By.cssSelector("#name"));
@@ -64,33 +71,65 @@ public class CustomerTest {
 		WebElement password = this.driver.findElement(By.cssSelector("#password"));
 		password.sendKeys("JHarry2024");
 
-		WebElement clickSubmit = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"submit\"]")));
+		WebElement clickSubmit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"al\"]")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickSubmit);
+		Thread.sleep(500);
 		clickSubmit.click();
 
-		WebElement usernameDisplay = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
-				"#root > div:nth-child(2) > div:nth-child(3) > div > div > div:nth-child(2) > div > div > h4")));
+		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+		alert.accept();
 
+		WebElement adminUsername = this.driver.findElement(By.cssSelector("#username"));
+		adminUsername.sendKeys("admin");
+
+		WebElement adminPassword = this.driver.findElement(By.cssSelector("#password"));
+		adminPassword.sendKeys("admin");
+
+		WebElement loginClick = this.driver
+				.findElement(By.cssSelector("#root > div > main > form > div > div > button"));
+		Thread.sleep(500);
+		loginClick.click();
+
+		Alert adminAlert = wait.until(ExpectedConditions.alertIsPresent());
+		adminAlert.accept();
+
+		WebElement usernameDisplay = this.wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div > h4")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", usernameDisplay);
 		Assertions.assertEquals("JHarry2024", usernameDisplay.getText());
 
-		WebElement editCust = wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.row > div:nth-child(2) #edit")));
-//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 500);", editCust);
-		editCust.click();
+		WebElement editClick = this.driver.findElement(By.cssSelector("div.row > div:nth-child(2) #edit"));
+		Thread.sleep(500);
+		editClick.click();
 
 		WebElement updateUser = this.driver.findElement(By.cssSelector("#username"));
 		updateUser.sendKeys(".V2");
 
-		WebElement clickUpdate = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("update")));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickUpdate);
-		clickUpdate.click();
+		WebElement updateClick = this.driver.findElement(By.cssSelector("#update"));
+		Thread.sleep(500);
+		updateClick.click();
 
-		WebElement amendedUser = this.driver.findElement(By.cssSelector(
-				"#root > div:nth-child(2) > div:nth-child(3) > div > div > div:nth-child(2) > div > div > h4"));
-//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", amendedUser);
+		WebElement updatedUsernameDisplay = this.wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div > h4")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", updatedUsernameDisplay);
+		Assertions.assertEquals("JHarry2024.V2", updatedUsernameDisplay.getText());
 
-		Assertions.assertEquals("JHarry2024.V2", amendedUser.getText());
+		WebElement deleteCustomer = this.driver.findElement(By.cssSelector("div.row div:nth-child(2) #delete"));
+		this.driver.executeScript("arguments[0].scrollIntoView(true);", deleteCustomer);
+		Thread.sleep(500);
+		deleteCustomer.click();
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until((ExpectedConditions.invisibilityOfElementLocated(
+				By.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div"))));
+		try {
+			this.driver.findElement(
+					By.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div"));
+			fail("Delete has failed");
+
+		} catch (NoSuchElementException ex) {
+
+		}
 
 	}
 }

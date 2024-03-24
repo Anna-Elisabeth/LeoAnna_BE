@@ -107,16 +107,16 @@ public class ItemService {
 		return ResponseEntity.ok(updated);
 	}
 
-	public ResponseEntity<Item> updateItem(int id, int customerId) {
-		Optional<Item> found = this.repo.findById(id);
-
-		if (found.isEmpty()) {
-			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
-		}
-		Item body = found.get();
-
-		body.setCustomer(this.customerRepo.findById(customerId).get());
-		return ResponseEntity.ok(this.repo.save(body));
-	}
+//	public ResponseEntity<Item> updateItem(int id, int customerId) {
+//		Optional<Item> found = this.repo.findById(id);
+//
+//		if (found.isEmpty()) {
+//			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+//		}
+//		Item body = found.get();
+//
+//		body.setCustomer(this.customerRepo.findById(customerId).get());
+//		return ResponseEntity.ok(this.repo.save(body));
+//	}
 
 }
