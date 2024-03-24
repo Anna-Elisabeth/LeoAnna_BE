@@ -46,7 +46,7 @@ public class ItemTest {
 
 	@Test
 	@Order(2)
-	void testCreate() throws InterruptedException {
+	void testItem() throws InterruptedException {
 		this.driver.get("http://localhost:3000/");
 
 		WebElement adminUsername = this.driver.findElement(By.cssSelector("#username"));
@@ -114,26 +114,6 @@ public class ItemTest {
 
 		WebElement updateClick = this.driver.findElement(By.cssSelector("#root > div > form > div > button"));
 		updateClick.click();
-
-//		WebElement homeClick = this.driver
-//				.findElement(By.cssSelector("#root > nav > div > div > div > div > div:nth-child(1) > a > img"));
-//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", homeClick);
-//		homeClick.click();
-//
-//		WebElement adminUsername2 = this.driver.findElement(By.cssSelector("#username"));
-//		adminUsername2.sendKeys("admin");
-//
-//		WebElement adminPassword2 = this.driver.findElement(By.cssSelector("#password"));
-//		adminPassword2.sendKeys("admin");
-
-//		WebElement loginClick2 = this.driver
-//				.findElement(By.cssSelector("#root > div > main > form > div > div > button"));
-//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", loginClick2);
-//		Thread.sleep(500);
-//		loginClick2.click();
-
-//		Alert alert2 = wait.until(ExpectedConditions.alertIsPresent());
-//		alert2.accept();
 
 		WebElement checkUpdatedName = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
 				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(2)")));
