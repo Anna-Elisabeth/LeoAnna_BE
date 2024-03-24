@@ -44,6 +44,7 @@ public class Item {
 
 	public Item(Integer id, String name, Double price, Long quantity) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
