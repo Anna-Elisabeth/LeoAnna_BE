@@ -9,7 +9,7 @@ INSERT INTO
     )
 VALUES
     (
-        'leo',
+        'Liliano',
         '123 Road',
         'leo@domain.com',
         '012345678',

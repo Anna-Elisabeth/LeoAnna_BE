@@ -1,5 +1,7 @@
 package com.lbg.everestbe.selenium;
 
+import static org.assertj.core.api.Assertions.fail;
+
 import java.time.Duration;
 
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -109,6 +112,23 @@ public class CustomerTest {
 				.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div > h4")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", updatedUsernameDisplay);
 		Assertions.assertEquals("JHarry2024.V2", updatedUsernameDisplay.getText());
+
+		WebElement deleteCustomer = this.driver.findElement(By.cssSelector("div.row div:nth-child(2) #delete"));
+		this.driver.executeScript("arguments[0].scrollIntoView(true);", deleteCustomer);
+		Thread.sleep(500);
+		deleteCustomer.click();
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until((ExpectedConditions.invisibilityOfElementLocated(
+				By.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div"))));
+		try {
+			this.driver.findElement(
+					By.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div"));
+			fail("Delete has failed");
+
+		} catch (NoSuchElementException ex) {
+
+		}
 
 	}
 }

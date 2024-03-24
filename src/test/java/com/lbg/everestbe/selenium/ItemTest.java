@@ -1,17 +1,34 @@
 package com.lbg.everestbe.selenium;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.time.Duration;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
+
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@TestMethodOrder(OrderAnnotation.class)
+
+@Sql(scripts = { "classpath:everest-schema.sql",
+		"classpath:everest-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 
 public class ItemTest {
 
@@ -24,71 +41,112 @@ public class ItemTest {
 		this.driver.manage().window().maximize();
 		this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-	}
-
-	@Test
-	void testCreate() {
-		this.driver.get("http://localhost:3000/items");
-
-		WebElement newItemLink = this.driver.findElement(By.cssSelector(
-				"#root > div.main-navbar.shadow-sm.sticky-top > div > div > div > div.col-md-5.my-auto > ul > li:nth-child(2) > a"));
-		newItemLink.click();
-
-		WebElement name = this.driver.findElement(By.cssSelector("#iname"));
-		name.sendKeys("Strawberries");
-
-		WebElement description = this.driver.findElement(By.cssSelector("#idesc"));
-		description.sendKeys("Organic - 200g");
-
-		WebElement price = this.driver.findElement(By.cssSelector("#iprice"));
-		price.sendKeys("5.99");
-
-		WebElement quantity = this.driver.findElement(By.cssSelector("#iquant"));
-		quantity.sendKeys("1");
-
-		WebElement clickSubmit = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector("#root > div:nth-child(2) > form > div > button")));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickSubmit);
-		clickSubmit.click();
-
-		WebElement display = this.driver
-				.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/div/div/div[1]/div/h4/p[1]"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", display);
-		Assertions.assertEquals(true, display.getText().contains("Strawberries"));
-
-		WebElement clickEdit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit\"]")));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickEdit);
-		clickEdit.click();
 
 	}
 
 	@Test
-	void EditTest() {
+	@Order(2)
+	void testItem() throws InterruptedException {
+		this.driver.get("http://localhost:3000/");
 
-		this.driver.get("http://localhost:3000/items/edit/1");
+		WebElement adminUsername = this.driver.findElement(By.cssSelector("#username"));
+		adminUsername.sendKeys("admin");
 
-		WebElement clearItemName = this.driver.findElement(By.cssSelector("#inameup"));
-		clearItemName.clear();
+		WebElement adminPassword = this.driver.findElement(By.cssSelector("#password"));
+		adminPassword.sendKeys("admin");
 
-		WebElement name = this.driver.findElement(By.cssSelector("#inameup"));
-		name.sendKeys("Drone");
+		WebElement loginClick = this.driver
+				.findElement(By.cssSelector("#root > div > main > form > div > div > button"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", loginClick);
+		Thread.sleep(500);
+		loginClick.click();
 
-		WebElement updateQuantity = this.driver.findElement(By.cssSelector("#ad"));
-		updateQuantity.sendKeys("7");
+		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+		alert.accept();
 
-		WebElement clickUpdate = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector("#root > div:nth-child(2) > form > div > button")));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickUpdate);
-		clickUpdate.click();
+		WebElement itemName = this.driver.findElement(By.cssSelector("#iname"));
+		itemName.sendKeys("Football");
 
-		WebElement display = this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/div/div/div/div/h4/p[1]"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", display);
-		Assertions.assertEquals(true, display.getText().contains("Drone"));
+		WebElement itemDescription = this.driver.findElement(By.cssSelector("#idesc"));
+		itemDescription.sendKeys("Demonskin 2.0 tech");
 
-		WebElement addToCart = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div[2]/div/div/div/div/div/button[1]")));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addToCart);
-		addToCart.click();
+		WebElement itemPrice = this.driver.findElement(By.cssSelector("#iprice"));
+		itemPrice.sendKeys("39.99");
+
+		WebElement itemQuantity = this.driver.findElement(By.cssSelector("#iquant"));
+		itemQuantity.sendKeys("3");
+
+		WebElement submitClick = this.driver.findElement(By.cssSelector("#root > div > main > form > div > button"));
+		submitClick.click();
+
+		WebElement checkItem = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(3)")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkItem);
+		Assertions.assertEquals("Demonskin 2.0 tech", checkItem.getText());
+
+		WebElement editClick = this.driver.findElement(By.cssSelector("div.row > div:nth-child(4) #edititem"));
+		Thread.sleep(500);
+		editClick.click();
+
+		WebElement clearName = driver.findElement(By.cssSelector("#inameup"));
+		clearName.clear();
+
+		WebElement updatedName = this.driver.findElement(By.cssSelector("#inameup"));
+		updatedName.sendKeys("Jordan");
+
+		WebElement clearDescription = driver.findElement(By.cssSelector("#idescup"));
+		clearDescription.clear();
+
+		WebElement updatedDescription = this.driver.findElement(By.cssSelector("#idescup"));
+		updatedDescription.sendKeys("Wizard");
+
+		WebElement clearPrice = driver.findElement(By.cssSelector("#ipriceup"));
+		clearPrice.clear();
+
+		WebElement updatedPrice = this.driver.findElement(By.cssSelector("#ipriceup"));
+		updatedPrice.sendKeys("999999999");
+
+		WebElement clearQuantity = driver.findElement(By.cssSelector("#ad"));
+		clearQuantity.clear();
+
+		WebElement updatedQuantity = this.driver.findElement(By.cssSelector("#ad"));
+		updatedQuantity.sendKeys("1");
+
+		WebElement updateClick = this.driver.findElement(By.cssSelector("#root > div > form > div > button"));
+		updateClick.click();
+
+		WebElement checkUpdatedName = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(2)")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkUpdatedName);
+		Assertions.assertEquals("Jordan", checkUpdatedName.getText());
+
+		WebElement checkUpdatedDesc = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(3)")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkUpdatedDesc);
+		Assertions.assertEquals("Wizard", checkUpdatedDesc.getText());
+
+		WebElement checkUpdatedPrice = this.wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > p")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkUpdatedPrice);
+		Assertions.assertEquals("Price: £999999999", checkUpdatedPrice.getText());
+
+		WebElement deleteItem = this.driver.findElement(By.cssSelector(
+				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > button.btn.btn-danger"));
+		this.driver.executeScript("arguments[0].scrollIntoView(true);", deleteItem);
+		Thread.sleep(500);
+		deleteItem.click();
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until((ExpectedConditions.invisibilityOfElementLocated(
+				By.cssSelector("#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4)"))));
+		try {
+			this.driver.findElement(
+					By.cssSelector("#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4)"));
+			fail("Delete has failed");
+
+		} catch (NoSuchElementException ex) {
+
+		}
+
 	}
-
 }
