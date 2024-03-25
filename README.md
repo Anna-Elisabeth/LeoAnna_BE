@@ -13,6 +13,7 @@ The project remit is to fix bugs, find/make improvements and add features.
 - Major Improvements:
   - Refactored SQL schema and data
   - Robust Testing in line with industry standards
+  - Deleted redudant/not usable code/classes, which increased Coverage
 
 ### Additional Documentation
   - To understand the structure and behaviour of our APIs, please refer to our Swagger documentation link http://localhost:8082/swagger-ui/index.html#/
