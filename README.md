@@ -4,32 +4,15 @@
 
 This project is build on top of Open Source code, this repository contains our Back-End code and is built on https://github.com/Craigm84/Everest_BE.
 
-For end-to-end functionality, please also refer to our Front-End repository https://github.com/Anna-Elisabeth/LeoAnna_FE, which is built on https://github.com/Liliano-Balde/Everest_FE.
+For end-to-end functionality and for a full list of additional features/improvements, please also refer to our Front-End repository https://github.com/Anna-Elisabeth/LeoAnna_FE, which is built on https://github.com/Liliano-Balde/Everest_FE.
 
 The project remit is to fix bugs, find/make improvements and add features.
 
 ### Key Features
-- Minor Improvements:
-  - Basket totals fixed to two decimal places
-  - Fixed item update bug, where description update field refered to item name input field
-  - Checkout page added
-  - Addressed minor errors flagged in console
-  - Updated component name conventions for consistency
 
 - Major Improvements:
   - Refactored SQL schema and data
-  - Robust Testing in line with industry standards   
-  - Improved login functionality
-  - Admin and basket interfaces updated for better organisation
- 
-- New Features:
-  - Accessibility:
-    - Aria and HTML5 landmarks applied
-    - Utilisation of `react-axe`
-    - [Utilisation of Microsoft Accessibility Insights Edge Extension](https://microsoftedge.microsoft.com/addons/detail/accessibility-insights-fo/ghbhpcookfemncgoinjblecnilppimih)
-    - [Utilisation of Microsoft Accessibility Insights for Windows Software](https://accessibilityinsights.io/downloads/)
-    - Implementation of industry standard accessible font Verdana (sans serif)
-    - Rebranding and revamp of styling to meet industry accessibility standards, and to make accessibility the focus of our application
+  - Robust Testing in line with industry standards
 
 ### Contribuitions and Ongoing Development
   This project remains Open Source and all contribuitions/suggestions are welcome, with a focus on:
@@ -50,7 +33,7 @@ The project remit is to fix bugs, find/make improvements and add features.
     - IDE (e.g. Eclipse, IntelliJ IDEA)
     - Spring Boot
     - Maven dependencies:
-      - Springdoc OpenAPI Starter for Spring Web MVC (SWagger)
+      - Springdoc OpenAPI Starter for Spring Web MVC (Swagger)
       - Selenium Java
       - Spring Boot Starter Data JPA
       - Spring Boot Starter Validation
