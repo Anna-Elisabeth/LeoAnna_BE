@@ -43,4 +43,4 @@ The project remit is to fix bugs, find/make improvements and add features.
       - Spring Boot Starter Test
       - H2 Database
       - MySQL Connector Java
-      - Spring Boot DevTools  
+      - Spring Boot DevTools
