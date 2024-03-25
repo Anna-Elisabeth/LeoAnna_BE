@@ -14,6 +14,9 @@ The project remit is to fix bugs, find/make improvements and add features.
   - Refactored SQL schema and data
   - Robust Testing in line with industry standards
 
+### Additional Documentation
+  - To understand the structure and behaviour of our APIs, please refer to our Swagger documentation link http://localhost:8082/swagger-ui/index.html#/
+
 ### Contribuitions and Ongoing Development
   This project remains Open Source and all contribuitions/suggestions are welcome, with a focus on:
   - Working towards WCAG 2.1 Level AA standard
@@ -41,6 +44,3 @@ The project remit is to fix bugs, find/make improvements and add features.
       - H2 Database
       - MySQL Connector Java
       - Spring Boot DevTools  
-
-
-
