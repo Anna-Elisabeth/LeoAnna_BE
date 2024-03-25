@@ -50,14 +50,14 @@ The project remit is to fix bugs, find/make improvements and add features.
     - IDE (e.g. Eclipse, IntelliJ IDEA)
     - Spring Boot
     - Maven dependencies:
-      - **Spring Boot Starter Web**
-- **Springdoc OpenAPI Starter for Spring Web MVC**
-- **Selenium Java**
-- **Spring Boot Starter Data JPA**
-- **Spring Boot Starter Validation**
-- **Spring Boot Starter Test**
-- **H2 Database**
-- **MySQL Connector Java**
-- **Spring Boot DevTools**
+      - Springdoc OpenAPI Starter for Spring Web MVC (SWagger)
+      - Selenium Java
+      - Spring Boot Starter Data JPA
+      - Spring Boot Starter Validation
+      - Spring Boot Starter Test
+      - H2 Database
+      - MySQL Connector Java
+      - Spring Boot DevTools  
+
 
 
