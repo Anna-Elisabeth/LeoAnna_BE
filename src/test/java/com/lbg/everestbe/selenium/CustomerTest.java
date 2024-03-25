@@ -45,6 +45,7 @@ public class CustomerTest {
 
 	@Test
 	@Order(1)
+
 	void testCreate() throws InterruptedException {
 		this.driver.get("http://localhost:3000/");
 

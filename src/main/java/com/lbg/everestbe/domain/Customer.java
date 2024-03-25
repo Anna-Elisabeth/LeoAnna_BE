@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Customer {
 
+//	Primary key for the Customer object
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -30,6 +31,7 @@ public class Customer {
 	@Column(nullable = false)
 	private String password;
 
+//	One-to-many relationship between Customer and Item objects	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "customer")
 	private List<Item> items;
@@ -46,6 +48,7 @@ public class Customer {
 
 	}
 
+//	Constructor with parameters for starting the Customer object
 	public Customer(Integer id, String name, String address, String email, String phone, String username,
 			String password) {
 		super();
@@ -63,6 +66,7 @@ public class Customer {
 		this.id = id;
 	}
 
+//	Getters and setters for the fields of the Customer object
 	public Integer getId() {
 		return id;
 	}
