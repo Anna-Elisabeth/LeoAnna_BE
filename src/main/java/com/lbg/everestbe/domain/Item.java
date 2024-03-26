@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Item {
 
+//	Primary key for the Item object
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -25,6 +26,7 @@ public class Item {
 	@Column(nullable = false)
 	private String description;
 
+//	Many-to-one relationship between Item and Customer objects	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
@@ -33,6 +35,7 @@ public class Item {
 	public Item() {
 	}
 
+//	Constructor with parameters for starting the Item object
 	public Item(Integer id, String name, Double price, Long quantity, String description) {
 		super();
 		this.id = id;
@@ -68,6 +71,7 @@ public class Item {
 		this.id = id;
 	}
 
+//	Getters and setters for the fields of the Item object
 	public Integer getId() {
 		return id;
 	}

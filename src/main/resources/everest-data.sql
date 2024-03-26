@@ -11,7 +11,6 @@ VALUES
     (
 
         'Liliano',
-
         '123 Road',
         'leo@domain.com',
         '012345678',
