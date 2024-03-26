@@ -45,6 +45,7 @@ public class CustomerTest {
 
 	@Test
 	@Order(1)
+
 	void testCreate() throws InterruptedException {
 		this.driver.get("http://localhost:3000/");
 
@@ -89,8 +90,10 @@ public class CustomerTest {
 		Thread.sleep(500);
 		loginClick.click();
 
-		Alert adminAlert = wait.until(ExpectedConditions.alertIsPresent());
-		adminAlert.accept();
+		WebElement continueAlertClick = this.driver.findElement(
+				By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button"));
+//		Thread.sleep(500);
+		continueAlertClick.click();
 
 		WebElement usernameDisplay = this.wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.cssSelector("#root > div > main > div:nth-child(3) > div > div > div:nth-child(2) > div > div > h4")));
