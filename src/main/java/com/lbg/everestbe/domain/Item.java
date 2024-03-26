@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Item {
 
+//	Primary key for the Item object
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -25,6 +26,7 @@ public class Item {
 	@Column(nullable = false)
 	private String description;
 
+//	Many-to-one relationship between Item and Customer objects	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
@@ -33,6 +35,7 @@ public class Item {
 	public Item() {
 	}
 
+//	Constructor with parameters for starting the Item object
 	public Item(Integer id, String name, Double price, Long quantity, String description) {
 		super();
 		this.id = id;
@@ -44,6 +47,7 @@ public class Item {
 
 	public Item(Integer id, String name, Double price, Long quantity) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
@@ -67,6 +71,7 @@ public class Item {
 		this.id = id;
 	}
 
+//	Getters and setters for the fields of the Item object
 	public Integer getId() {
 		return id;
 	}
@@ -103,38 +108,6 @@ public class Item {
 	public String toString() {
 		return "Item: id = " + id + ", name = " + name + ", price = " + price + ", quantity = " + quantity;
 	}
-
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Item other = (Item) obj;
-//		if (id == null) {
-//			if (other.id != null)
-//				return false;
-//		} else if (!id.equals(other.id))
-//			return false;
-//		if (name == null) {
-//			if (other.name != null)
-//				return false;
-//		} else if (!name.equals(other.name))
-//			return false;
-//		if (price == null) {
-//			if (other.price != null)
-//				return false;
-//		} else if (!price.equals(other.price))
-//			return false;
-//		if (quantity == null) {
-//			if (other.quantity != null)
-//				return false;
-//		} else if (!quantity.equals(other.quantity))
-//			return false;
-//		return true;
-//	}
 
 	public Customer getCustomer() {
 		return customer;

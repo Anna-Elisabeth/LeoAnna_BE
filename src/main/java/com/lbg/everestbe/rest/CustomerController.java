@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lbg.everestbe.domain.Customer;
 import com.lbg.everestbe.service.CustomerService;
 
+//Root URL path for all endpoints within this controller.
 @RequestMapping("/customer")
+//Enables cross-domain communication with this controller
 @CrossOrigin
+//Marks this class as a REST controller
 @RestController
 public class CustomerController {
 
