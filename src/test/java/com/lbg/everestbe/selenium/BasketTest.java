@@ -59,9 +59,16 @@ public class BasketTest {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickSubmit);
 		Thread.sleep(500);
 		clickSubmit.click();
+		
+		WebElement continueAlertClick = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", continueAlertClick);
+		Thread.sleep(500);
+		continueAlertClick.click();
 
-		Alert failAlert = wait.until(ExpectedConditions.alertIsPresent());
-		failAlert.accept();
+		
+		
+	
 
 		WebElement name = this.driver.findElement(By.cssSelector("#name"));
 		name.sendKeys("Liliano");
@@ -102,12 +109,19 @@ public class BasketTest {
 		Thread.sleep(500);
 		clickSubmit2.click();
 
-		Alert alert2 = wait.until(ExpectedConditions.alertIsPresent());
-		alert2.accept();
+		WebElement welcomeClick = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", welcomeClick);
+		Thread.sleep(500);
+		welcomeClick.click();
+		
 
 		WebElement clickAddItem1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("#root > div > main > div > div > div > div:nth-child(1) > div > button")));
+		Thread.sleep(500);
 		clickAddItem1.click();
+		
+		
 
 		Alert alertItem1 = wait.until(ExpectedConditions.alertIsPresent());
 		alertItem1.accept();
@@ -137,8 +151,7 @@ public class BasketTest {
 				By.cssSelector("#root > div > main > table > tbody > tr:nth-child(1) > td:nth-child(6) > button"));
 		checkDeletedItem.click();
 
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//td[contains(text(), 'Strawberries')]")));
+
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions
