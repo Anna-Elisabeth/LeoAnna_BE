@@ -10,7 +10,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -76,8 +75,9 @@ public class CustomerTest {
 		Thread.sleep(500);
 		clickSubmit.click();
 
-		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-		alert.accept();
+		WebElement clickLoginAlert = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector("#root > div > div > main > form > div.overlay > div > div > div.btnContainer > button")));
+		clickLoginAlert.click();
 
 		WebElement adminUsername = this.driver.findElement(By.cssSelector("#username"));
 		adminUsername.sendKeys("admin");
