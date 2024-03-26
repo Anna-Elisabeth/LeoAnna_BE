@@ -61,8 +61,10 @@ public class ItemTest {
 		Thread.sleep(500);
 		loginClick.click();
 
-		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-		alert.accept();
+	WebElement adminContinueClick = this.driver.findElement(By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button"));
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", adminContinueClick);
+		Thread.sleep(500);
+		adminContinueClick.click();
 
 		WebElement itemName = this.driver.findElement(By.cssSelector("#iname"));
 		itemName.sendKeys("Football");
@@ -77,7 +79,11 @@ public class ItemTest {
 		itemQuantity.sendKeys("3");
 
 		WebElement submitClick = this.driver.findElement(By.cssSelector("#root > div > main > form > div > button"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitClick);
+		Thread.sleep(500);
 		submitClick.click();
+		
+		
 
 		WebElement checkItem = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
 				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(3)")));
@@ -126,7 +132,7 @@ public class ItemTest {
 		Assertions.assertEquals("Wizard", checkUpdatedDesc.getText());
 
 		WebElement checkUpdatedPrice = this.wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > p")));
+				.cssSelector("#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(4)")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkUpdatedPrice);
 		Assertions.assertEquals("Price: £999999999", checkUpdatedPrice.getText());
 

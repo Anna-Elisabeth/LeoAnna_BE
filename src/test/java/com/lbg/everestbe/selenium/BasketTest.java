@@ -10,7 +10,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -60,8 +59,11 @@ public class BasketTest {
 		Thread.sleep(500);
 		clickSubmit.click();
 
-		Alert failAlert = wait.until(ExpectedConditions.alertIsPresent());
-		failAlert.accept();
+		WebElement continueAlertClick = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", continueAlertClick);
+		Thread.sleep(500);
+		continueAlertClick.click();
 
 		WebElement name = this.driver.findElement(By.cssSelector("#name"));
 		name.sendKeys("Liliano");
@@ -87,8 +89,14 @@ public class BasketTest {
 		Thread.sleep(500);
 		clickRegister.click();
 
-		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-		alert.accept();
+		WebElement confirmSubmit = this.wait.until(ExpectedConditions.presenceOfElementLocated(
+				By.cssSelector("#root > div > div > main > form > div.overlay > div > div > div.content")));
+		Assertions.assertEquals("Registered! Redirecting to the login page", confirmSubmit.getText());
+
+		WebElement clickContinueModal = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector("#root > div > div > main > form > div.overlay > div > div > div.btnContainer > button")));
+		Thread.sleep(500);
+		clickContinueModal.click();
 
 		WebElement name2 = this.driver.findElement(By.cssSelector("#username"));
 		name2.sendKeys("Lb4lD£");
@@ -102,31 +110,52 @@ public class BasketTest {
 		Thread.sleep(500);
 		clickSubmit2.click();
 
-		Alert alert2 = wait.until(ExpectedConditions.alertIsPresent());
-		alert2.accept();
+		WebElement welcomeClick = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", welcomeClick);
+		Thread.sleep(500);
+		welcomeClick.click();
 
 		WebElement clickAddItem1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("#root > div > main > div > div > div > div:nth-child(1) > div > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickAddItem1);
+		Thread.sleep(500);
 		clickAddItem1.click();
 
-		Alert alertItem1 = wait.until(ExpectedConditions.alertIsPresent());
-		alertItem1.accept();
+		WebElement itemModalClick = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				"#root > div > main > div > div > div > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemModalClick);
+		Thread.sleep(500);
+		itemModalClick.click();
 
 		WebElement clickAddItem2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("#root > div > main > div > div > div > div:nth-child(2) > div > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickAddItem2);
+		Thread.sleep(500);
 		clickAddItem2.click();
 
-		Alert alertItem2 = wait.until(ExpectedConditions.alertIsPresent());
-		alertItem2.accept();
+		WebElement itemModalClick2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				"#root > div > main > div > div > div > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemModalClick2);
+		Thread.sleep(500);
+		itemModalClick2.click();
 
 		WebElement clickAddItem3 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("#root > div > main > div > div > div > div:nth-child(3) > div > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickAddItem3);
+		Thread.sleep(500);
+
 		clickAddItem3.click();
 
-		Alert alertItem3 = wait.until(ExpectedConditions.alertIsPresent());
-		alertItem3.accept();
+		WebElement itemModalClick3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				"#root > div > main > div > div > div > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemModalClick3);
+		Thread.sleep(500);
+		itemModalClick3.click();
 
 		WebElement clickBasket = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#basket")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickBasket);
+		Thread.sleep(500);
 		clickBasket.click();
 
 		WebElement clickClear = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
@@ -136,9 +165,6 @@ public class BasketTest {
 		WebElement checkDeletedItem = this.driver.findElement(
 				By.cssSelector("#root > div > main > table > tbody > tr:nth-child(1) > td:nth-child(6) > button"));
 		checkDeletedItem.click();
-
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//td[contains(text(), 'Strawberries')]")));
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions
@@ -194,7 +220,13 @@ public class BasketTest {
 
 		WebElement clickCheckout = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#root > div > main > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickCheckout);
+		Thread.sleep(500);
 		clickCheckout.click();
+
+		WebElement checkCheckoutPage = this.wait
+				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#root > div > header > h1")));
+		Assertions.assertEquals("Payment Details", checkCheckoutPage.getText());
 
 	}
 }
