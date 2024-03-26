@@ -118,29 +118,47 @@ public class BasketTest {
 
 		WebElement clickAddItem1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("#root > div > main > div > div > div > div:nth-child(1) > div > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickAddItem1);
 		Thread.sleep(500);
 		clickAddItem1.click();
 		
+		WebElement itemModalClick = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.cssSelector("#root > div > main > div > div > div > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemModalClick);
+		Thread.sleep(500);
+		itemModalClick.click();
 		
-
-		Alert alertItem1 = wait.until(ExpectedConditions.alertIsPresent());
-		alertItem1.accept();
+		
+		
 
 		WebElement clickAddItem2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("#root > div > main > div > div > div > div:nth-child(2) > div > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickAddItem2);
+		Thread.sleep(500);
 		clickAddItem2.click();
 
-		Alert alertItem2 = wait.until(ExpectedConditions.alertIsPresent());
-		alertItem2.accept();
+		WebElement itemModalClick2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.cssSelector("#root > div > main > div > div > div > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemModalClick2);
+		Thread.sleep(500);
+		itemModalClick2.click();
 
 		WebElement clickAddItem3 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("#root > div > main > div > div > div > div:nth-child(3) > div > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickAddItem3);
+		Thread.sleep(500);
+		
 		clickAddItem3.click();
 
-		Alert alertItem3 = wait.until(ExpectedConditions.alertIsPresent());
-		alertItem3.accept();
+		WebElement itemModalClick3 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.cssSelector("#root > div > main > div > div > div > div.overlay > div > div > div.btnContainer > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemModalClick3);
+		Thread.sleep(500);
+		itemModalClick3.click();
 
 		WebElement clickBasket = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#basket")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickBasket);
+		Thread.sleep(500);
 		clickBasket.click();
 
 		WebElement clickClear = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
@@ -207,6 +225,8 @@ public class BasketTest {
 
 		WebElement clickCheckout = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#root > div > main > button")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clickCheckout);
+		Thread.sleep(500);
 		clickCheckout.click();
 
 	}
