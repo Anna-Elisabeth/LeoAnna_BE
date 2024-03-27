@@ -10,7 +10,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -61,8 +60,9 @@ public class ItemTest {
 		Thread.sleep(500);
 		loginClick.click();
 
-	WebElement adminContinueClick = this.driver.findElement(By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button"));
-		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", adminContinueClick);
+		WebElement adminContinueClick = this.driver.findElement(
+				By.cssSelector("#root > div > main > form > div.overlay > div > div > div.btnContainer > button"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", adminContinueClick);
 		Thread.sleep(500);
 		adminContinueClick.click();
 
@@ -82,8 +82,6 @@ public class ItemTest {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitClick);
 		Thread.sleep(500);
 		submitClick.click();
-		
-		
 
 		WebElement checkItem = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
 				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(3)")));
@@ -131,8 +129,8 @@ public class ItemTest {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkUpdatedDesc);
 		Assertions.assertEquals("Wizard", checkUpdatedDesc.getText());
 
-		WebElement checkUpdatedPrice = this.wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(4)")));
+		WebElement checkUpdatedPrice = this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+				"#root > div > main > div:nth-child(2) > div > div > div > div:nth-child(4) > div > h4 > p:nth-child(4)")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkUpdatedPrice);
 		Assertions.assertEquals("Price: £999999999", checkUpdatedPrice.getText());
 
