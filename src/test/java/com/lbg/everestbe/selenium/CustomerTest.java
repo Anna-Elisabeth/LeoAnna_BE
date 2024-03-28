@@ -101,6 +101,7 @@ public class CustomerTest {
 		Assertions.assertEquals("JHarry2024", usernameDisplay.getText());
 
 		WebElement editClick = this.driver.findElement(By.cssSelector("div.row > div:nth-child(2) #edit"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editClick);
 		Thread.sleep(500);
 		editClick.click();
 
