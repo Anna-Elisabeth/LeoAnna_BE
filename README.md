@@ -14,6 +14,7 @@ The project remit is to fix bugs, find/make improvements and add features.
   - Refactored SQL schema and data
   - Robust Testing in line with industry standards
   - Deleted redudant/not usable code/classes, which increased Coverage
+  - Implemented a fully responsive contact form feature
 
 ### Additional Documentation
   - To understand the structure and behaviour of our APIs, please refer to our Swagger documentation link http://localhost:8082/swagger-ui/index.html#/
@@ -25,6 +26,7 @@ The project remit is to fix bugs, find/make improvements and add features.
   - Search bar functionality
   - Full separation between user types (different users have their respective logins and baskets)
   - Mobile friendly features
+  - Implementation of Spring Security validation
   To contribute, please note, our preferred workflow is the fork-pull request model.
 
 ### Current Contributors
